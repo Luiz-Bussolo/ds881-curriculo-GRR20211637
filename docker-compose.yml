@@ -1,0 +1,14 @@
+services:
+  curriculo:
+    build: .
+    # Mapeia a porta 8080 do seu PC para a 4321 do contêiner (requisito do README)
+    ports:
+      - "8080:4321"
+    volumes:
+      # Bind Mount: Mapeia a pasta atual para /app no contêiner para o Hot Reload funcionar
+      - .:/app
+      # Volume anônimo: Impede que a pasta local sobrescreva o node_modules do contêiner
+      - /app/node_modules
+    environment:
+      # Força o hot reload a funcionar perfeitamente mesmo em ambientes Windows/WSL
+      - CHOKIDAR_USEPOLLING=true
