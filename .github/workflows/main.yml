@@ -1,0 +1,54 @@
+name: CI/CD Pipeline - Currículo
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# Permissões necessárias para o GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  lint-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Instalar dependências
+        # Usa npm ci para instalações automatizadas mais limpas e rápidas
+        run: npm ci
+
+      - name: Linter / Static Analysis
+        run: npx astro check
+
+      - name: Build da aplicação
+        run: npm run build
+
+      - name: Upload Artifact para o Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist # O Astro gera os arquivos estáticos na pasta dist
+
+  deploy:
+    needs: lint-and-build
+    # O deploy só acontece se for um push/merge na main, ignorando PRs abertos
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy para o GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
