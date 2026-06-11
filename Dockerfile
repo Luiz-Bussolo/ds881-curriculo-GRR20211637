@@ -15,7 +15,3 @@ COPY . .
 
 # Expõe a porta padrão que o Astro utiliza internamente
 EXPOSE 4321
-
-# Comando para iniciar o servidor em modo dev
-# A flag --host 0.0.0.0 é obrigatória para acessar o servidor fora do contêiner
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

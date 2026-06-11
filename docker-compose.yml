@@ -12,3 +12,5 @@ services:
     environment:
       # Força o hot reload a funcionar perfeitamente mesmo em ambientes Windows/WSL
       - CHOKIDAR_USEPOLLING=true
+      # Inicia servidor Astro
+    command: npm run dev -- --host 0.0.0.0
