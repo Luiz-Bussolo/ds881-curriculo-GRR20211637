@@ -22,7 +22,7 @@ Este projeto utiliza o SSG Astro e está conteinerizado para facilitar o desenvo
 ## 🛡️ Governança e Branch Protection
 O projeto segue o fluxo de Pull Requests e Conventional Commits. A branch `main` está protegida contra pushes diretos e exige a aprovação com sucesso no pipeline de CI (Linter e Build automatizados via GitHub Actions) antes de qualquer integração.
 
-![Print da Proteção de Branch](image.png)
-![Print da Proteção de Branch](image-1.png)
+![Print da Proteção de Branch](./img/image.png)
+![Print da Proteção de Branch](./img/image-1.png)
 
 *Nota: Print comprovando o bloqueio de commits diretos na main e a exigência do status check.*
